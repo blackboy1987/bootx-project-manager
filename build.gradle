@@ -1,0 +1,43 @@
+plugins {
+  id 'org.springframework.boot' version '2.2.6.RELEASE'
+  id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+  id 'java'
+}
+
+group = 'com.bootx'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+  maven {
+    url  'http://maven.aliyun.com/nexus/content/groups/public/'
+  }
+}
+
+dependencies {
+  compile fileTree(dir:'lib',includes:['*jar'])
+  compile group: 'jaxen', name: 'jaxen', version: '1.2.0'
+
+  compile group: 'org.apache.commons', name: 'commons-collections4', version: '4.4'
+  compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.10'
+  compile group: 'org.hibernate', name: 'hibernate-search-orm', version: '5.11.5.Final'
+  compile group: 'commons-beanutils', name: 'commons-beanutils', version: '1.9.4'
+
+  compile group: 'org.springframework.boot', name: 'spring-boot-starter-freemarker'
+
+
+  compile group: 'org.freemarker', name: 'freemarker', version: '2.3.30'
+  compile group: 'commons-io', name: 'commons-io', version: '2.6'
+
+
+  implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+  implementation 'org.springframework.boot:spring-boot-starter-web'
+  runtimeOnly 'mysql:mysql-connector-java'
+  testImplementation('org.springframework.boot:spring-boot-starter-test') {
+    exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+  }
+}
+
+test {
+  useJUnitPlatform()
+}

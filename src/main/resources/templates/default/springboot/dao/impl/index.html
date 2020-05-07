@@ -1,0 +1,17 @@
+package ${project.packageName}.dao.impl;
+
+import org.springframework.stereotype.Repository;
+
+import ${project.packageName}.dao.${projectTable.capitalizeName()}Dao;
+import ${project.packageName}.entity.${projectTable.capitalizeName()};
+
+/**
+* Dao - ${projectTable.memo}
+*
+* @author blackboy
+* @version 1.0
+*/
+@Repository
+public class ${projectTable.capitalizeName()}DaoImpl extends BaseDaoImpl<${projectTable.capitalizeName()}, Long> implements ${projectTable.capitalizeName()}Dao {
+
+}

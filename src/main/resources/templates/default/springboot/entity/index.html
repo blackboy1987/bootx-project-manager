@@ -1,0 +1,47 @@
+package ${project.packageName};
+
+import javax.persistence.*;
+[#list projectTable.importPackages as importPackage]
+import ${importPackage};
+[/#list]
+
+/**
+* Entity - ${projectTable.memo}
+*
+* @author blackboy
+* @version 1.0
+*/
+@Entity
+@Table(name = "bootx_${projectTable.uncapitalizeName()}")
+public class ${projectTable.capitalizeName()} extends BaseEntity<Long> {
+
+  [#list projectTable.projectColumns as projectColumn]
+  /**
+  * ${projectColumn.memo}
+  */
+  private ${projectColumn.type} ${projectColumn.uncapitalizeName()};
+
+  [/#list]
+  [#list projectTable.projectColumns as projectColumn]
+  /**
+  * 获取${projectColumn.memo}
+  *
+  * @return ${projectColumn.memo}
+  */
+  public ${projectColumn.type} get${projectColumn.capitalizeName()}() {
+    return ${projectColumn.uncapitalizeName()};
+  }
+
+  /**
+  * 设置${projectColumn.memo}
+  *
+  * @param ${projectColumn.uncapitalizeName()}
+  *     ${projectColumn.memo}
+  */
+  public void set${projectColumn.capitalizeName()}(${projectColumn.type} ${projectColumn.uncapitalizeName()}) {
+    this.${projectColumn.uncapitalizeName()} = ${projectColumn.uncapitalizeName()};
+  }
+
+  [/#list]
+
+}

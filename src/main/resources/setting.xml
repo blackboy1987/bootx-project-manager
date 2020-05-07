@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<setting>
+  <template id="entity" type="page" name="实体" templatePath="/${template}/springboot/entity/index.html" staticPath="/${projectName}/${now?string('yyyyMMddHHmm')}/${packageName}/entity/${tableName}.java"/>
+  <template id="dao" type="page" name="DAO" templatePath="/${template}/springboot/dao/index.html" staticPath="/${projectName}/${now?string('yyyyMMddHHmm')}/${packageName}/dao/${tableName}Dao.java"/>
+  <template id="daoImpl" type="page" name="DAO实现" templatePath="/${template}/springboot/dao/impl/index.html" staticPath="/${projectName}/${now?string('yyyyMMddHHmm')}/${packageName}/dao/impl/${tableName}DaoImpl.java"/>
+  <template id="service" type="page" name="SERVICE" templatePath="/${template}/springboot/service/index.html" staticPath="/${projectName}/${now?string('yyyyMMddHHmm')}/${packageName}/service/${tableName}Service.java"/>
+  <template id="serviceImpl" type="page" name="SERVICE实现" templatePath="/${template}/springboot/service/impl/index.html" staticPath="/${projectName}/${now?string('yyyyMMddHHmm')}/${packageName}/service/impl/${tableName}ServiceImpl.java"/>
+  <template id="controller" type="page" name="CONTROLLER" templatePath="/${template}/springboot/controller/index.html" staticPath="/${projectName}/${now?string('yyyyMMddHHmm')}/${packageName}/controller/${tableName}Controller.java"/>
+
+</setting>
