@@ -16,4 +16,5 @@ import java.util.Date;
 public interface ProjectInfoDao extends BaseDao<ProjectInfo, Long> {
 
   Page<ProjectInfo> findPage(Pageable pageable, String name, String memo, Date beginDate, Date endDate);
+
 }

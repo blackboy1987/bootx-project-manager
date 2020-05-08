@@ -24,7 +24,7 @@ public class ProjectInfo extends BaseEntity<Long> {
   /**
    * 项目名称
    */
-  @JsonView({ListView.class,EditView.class})
+  @JsonView({ListView.class,EditView.class,TreeView.class})
   private String name;
 
   @Length(max = 1000)
@@ -114,4 +114,5 @@ public class ProjectInfo extends BaseEntity<Long> {
   public void setStatus(Integer status) {
     this.status = status;
   }
+
 }

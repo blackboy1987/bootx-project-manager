@@ -5,6 +5,7 @@ import com.bootx.common.CommonAttributes;
 import com.bootx.common.ProjectTemplate;
 import com.bootx.util.FreemarkerUtils;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
 import freemarker.template.TemplateException;
 import org.apache.commons.lang3.StringUtils;
 import org.dom4j.Document;
@@ -23,9 +24,17 @@ public class ProjectTable extends BaseEntity<Long>{
   /**
    * 表名称
    */
+  @JsonView({ListView.class,EditView.class})
   private String name;
 
+  @JsonView({ListView.class,EditView.class})
   private String memo;
+
+  @JsonView({ListView.class,EditView.class})
+  private String alias;
+
+  @JsonView({ListView.class,EditView.class})
+  private String parentClass;
 
   @ManyToOne(fetch = FetchType.LAZY)
   private ProjectInfo projectInfo;
@@ -64,6 +73,22 @@ public class ProjectTable extends BaseEntity<Long>{
 
   public void setProjectInfo(ProjectInfo projectInfo) {
     this.projectInfo = projectInfo;
+  }
+
+  public String getAlias() {
+    return alias;
+  }
+
+  public void setAlias(String alias) {
+    this.alias = alias;
+  }
+
+  public String getParentClass() {
+    return parentClass;
+  }
+
+  public void setParentClass(String parentClass) {
+    this.parentClass = parentClass;
   }
 
   private static String entityStaticPath;
@@ -186,6 +211,24 @@ public class ProjectTable extends BaseEntity<Long>{
     }
 
     return importPackages;
+  }
+
+  @Transient
+  @JsonView({EditView.class})
+  public Long getProjectId(){
+    if(projectInfo!=null){
+      return projectInfo.getId();
+    }
+    return null;
+  }
+
+  @Transient
+  @JsonView({ListView.class})
+  public String getProjectName(){
+    if(projectInfo!=null){
+      return projectInfo.getName();
+    }
+    return null;
   }
 
 }

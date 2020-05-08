@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping("/project")
@@ -57,6 +58,12 @@ public class ProjectInfoController extends BaseController {
   public Message delete(Long[] ids){
     projectInfoService.delete(ids);
     return Message.success("操作成功");
+  }
+
+  @PostMapping("/all")
+  @JsonView(BaseEntity.TreeView.class)
+  public List<ProjectInfo> all(){
+    return projectInfoService.findAll();
   }
 
 }

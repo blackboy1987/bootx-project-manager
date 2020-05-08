@@ -15,6 +15,8 @@ import java.util.Date;
  */
 public interface ProjectInfoService extends BaseService<ProjectInfo, Long> {
 
+  Integer build(ProjectInfo projectInfo);
+
   Page<ProjectInfo> findPage(Pageable pageable, String name, String memo, Date beginDate, Date endDate);
 
 }
