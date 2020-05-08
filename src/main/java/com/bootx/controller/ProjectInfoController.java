@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Date;
 
 @RestController
-@RequestMapping("/api/project")
+@RequestMapping("/project")
 public class ProjectInfoController extends BaseController {
 
   @Autowired
