@@ -2,7 +2,6 @@ package com.bootx.entity;
 
 
 import com.bootx.common.CommonAttributes;
-import com.bootx.common.ProjectTemplate;
 import com.bootx.util.FreemarkerUtils;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
@@ -91,51 +90,24 @@ public class ProjectTable extends BaseEntity<Long>{
     this.parentClass = parentClass;
   }
 
-  private static String entityStaticPath;
-  private static String daoStaticPath;
-  private static String daoImplStaticPath;
-  private static String serviceStaticPath;
-  private static String serviceImplStaticPath;
-  private static String controllerStaticPath;
-
-
-  private static String entityTemplatePath;
-  private static String daoTemplatePath;
-  private static String daoImplTemplatePath;
-  private static String serviceTemplatePath;
-  private static String serviceImplTemplatePath;
-  private static String controllerTemplatePath;
+  private static Map<String,String> templates=null;
 
   static {
     try {
+      templates = new HashMap<>();
       InputStream settingXmlFile = new ClassPathResource(CommonAttributes.LX_XML_PATH).getInputStream();
       Document document = new SAXReader().read(settingXmlFile);
-      org.dom4j.Element element = (org.dom4j.Element) document.selectSingleNode("/setting/template[@id='entity']");
-      entityStaticPath = element.attributeValue("staticPath");
-      element = (org.dom4j.Element) document.selectSingleNode("/setting/template[@id='dao']");
-      daoStaticPath = element.attributeValue("staticPath");
-      element = (org.dom4j.Element) document.selectSingleNode("/setting/template[@id='daoImpl']");
-      daoImplStaticPath = element.attributeValue("staticPath");
-      element = (org.dom4j.Element) document.selectSingleNode("/setting/template[@id='service']");
-      serviceStaticPath = element.attributeValue("staticPath");
-      element = (org.dom4j.Element) document.selectSingleNode("/setting/template[@id='serviceImpl']");
-      serviceImplStaticPath = element.attributeValue("staticPath");
-      element = (org.dom4j.Element) document.selectSingleNode("/setting/template[@id='controller']");
-      controllerStaticPath = element.attributeValue("staticPath");
 
-
-      element = (org.dom4j.Element) document.selectSingleNode("/setting/template[@id='entity']");
-      entityTemplatePath = element.attributeValue("templatePath");
-      element = (org.dom4j.Element) document.selectSingleNode("/setting/template[@id='dao']");
-      daoTemplatePath = element.attributeValue("templatePath");
-      element = (org.dom4j.Element) document.selectSingleNode("/setting/template[@id='daoImpl']");
-      daoImplTemplatePath = element.attributeValue("templatePath");
-      element = (org.dom4j.Element) document.selectSingleNode("/setting/template[@id='service']");
-      serviceTemplatePath = element.attributeValue("templatePath");
-      element = (org.dom4j.Element) document.selectSingleNode("/setting/template[@id='serviceImpl']");
-      serviceImplTemplatePath = element.attributeValue("templatePath");
-      element = (org.dom4j.Element) document.selectSingleNode("/setting/template[@id='controller']");
-      controllerTemplatePath = element.attributeValue("templatePath");
+      List<org.dom4j.Node> nodes = document.selectNodes("/setting/template[@type='springboot']");
+      for (org.dom4j.Node node:nodes) {
+        org.dom4j.Element element = (org.dom4j.Element) node;
+        templates.put(element.attributeValue("templatePath"),element.attributeValue("staticPath"));
+      }
+      nodes = document.selectNodes("/setting/template[@type='ant_ts']");
+      for (org.dom4j.Node node:nodes) {
+        org.dom4j.Element element = (org.dom4j.Element) node;
+        templates.put(element.attributeValue("templatePath"),element.attributeValue("staticPath"));
+      }
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -143,8 +115,8 @@ public class ProjectTable extends BaseEntity<Long>{
 
   @JsonProperty
   @Transient
-  public ProjectTemplate getProjectTemplate() {
-    ProjectTemplate projectTemplate = new ProjectTemplate();
+  public Map<String,String> getTemplatePaths() {
+    Map<String,String> templatePaths = new HashMap<>();
     Map<String, Object> model = new HashMap<>();
     model.put("id", getId());
     model.put("now", new Date());
@@ -155,25 +127,15 @@ public class ProjectTable extends BaseEntity<Long>{
     model.put("tableName", getName());
     model.put("template",StringUtils.isNotEmpty(getProjectInfo().getTemplate())?getProjectInfo().getTemplate():"default");
     try {
-      projectTemplate.setEntityStaticPath(FreemarkerUtils.process(entityStaticPath, model));
-      projectTemplate.setDaoStaticPath(FreemarkerUtils.process(daoStaticPath, model));
-      projectTemplate.setDaoImplStaticPath(FreemarkerUtils.process(daoImplStaticPath, model));
-      projectTemplate.setServiceStaticPath(FreemarkerUtils.process(serviceStaticPath, model));
-      projectTemplate.setServiceImplStaticPath(FreemarkerUtils.process(serviceImplStaticPath, model));
-      projectTemplate.setControllerStaticPath(FreemarkerUtils.process(controllerStaticPath, model));
-
-      projectTemplate.setEntityTemplatePath(FreemarkerUtils.process(entityTemplatePath, model));
-      projectTemplate.setDaoTemplatePath(FreemarkerUtils.process(daoTemplatePath, model));
-      projectTemplate.setDaoImplTemplatePath(FreemarkerUtils.process(daoImplTemplatePath, model));
-      projectTemplate.setServiceTemplatePath(FreemarkerUtils.process(serviceTemplatePath, model));
-      projectTemplate.setServiceImplTemplatePath(FreemarkerUtils.process(serviceImplTemplatePath, model));
-      projectTemplate.setControllerTemplatePath(FreemarkerUtils.process(controllerTemplatePath, model));
+      for (String key:templates.keySet()) {
+        templatePaths.put(FreemarkerUtils.process(key, model),FreemarkerUtils.process(templates.get(key), model));
+      }
     } catch (IOException e) {
       e.printStackTrace();
     } catch (TemplateException e) {
       e.printStackTrace();
     }
-    return projectTemplate;
+    return templatePaths;
   }
 
   /**

@@ -18,7 +18,6 @@ import { FormInstance } from 'antd/lib/form';
 import { Dispatch, history } from 'umi';
 import { DepartmentTree } from '@/pages/system/department/data';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { getSiteInfo } from '@/utils/common';
 import { TableListItem } from '../data';
 import { StateType } from '../model';
 
@@ -155,14 +154,9 @@ class CreateFrom extends Component<CreateFromProps, CreateFromState> {
     return (
       <PageHeaderWrapper title={false}>
         <Card bordered={false}>
-          <Alert showIcon type="info" message={`默认密码是${getSiteInfo('defaultPassword')}`} />
           <Form
             ref={this.formRef}
             onFinish={this.onFinish}
-            initialValues={{
-              isEnabled: true,
-              isLocked: false,
-            }}
           >
             <FormItem name="id" style={{ display: 'none' }}>
               <Input type="hidden" />

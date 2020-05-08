@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <setting>
-  <template id="entity" type="page" name="实体" templatePath="/${template}/springboot/entity/index.html" staticPath="/${projectName}/${now?string('yyyyMMddHHmm')}/${packageName}/entity/${tableName}.java"/>
-  <template id="dao" type="page" name="DAO" templatePath="/${template}/springboot/dao/index.html" staticPath="/${projectName}/${now?string('yyyyMMddHHmm')}/${packageName}/dao/${tableName}Dao.java"/>
-  <template id="daoImpl" type="page" name="DAO实现" templatePath="/${template}/springboot/dao/impl/index.html" staticPath="/${projectName}/${now?string('yyyyMMddHHmm')}/${packageName}/dao/impl/${tableName}DaoImpl.java"/>
-  <template id="service" type="page" name="SERVICE" templatePath="/${template}/springboot/service/index.html" staticPath="/${projectName}/${now?string('yyyyMMddHHmm')}/${packageName}/service/${tableName}Service.java"/>
-  <template id="serviceImpl" type="page" name="SERVICE实现" templatePath="/${template}/springboot/service/impl/index.html" staticPath="/${projectName}/${now?string('yyyyMMddHHmm')}/${packageName}/service/impl/${tableName}ServiceImpl.java"/>
-  <template id="controller" type="page" name="CONTROLLER" templatePath="/${template}/springboot/controller/index.html" staticPath="/${projectName}/${now?string('yyyyMMddHHmm')}/${packageName}/controller/${tableName}Controller.java"/>
+  <template id="entity" type="springboot" name="实体" templatePath="/${template}/springboot/entity/index.html" staticPath="/${projectName}/${now?string('yyyyMMddHHmm')}/${packageName}/entity/${tableName}.java"/>
+  <template id="dao" type="springboot" name="DAO" templatePath="/${template}/springboot/dao/index.html" staticPath="/${projectName}/${now?string('yyyyMMddHHmm')}/${packageName}/dao/${tableName}Dao.java"/>
+  <template id="daoImpl" type="springboot" name="DAO实现" templatePath="/${template}/springboot/dao/impl/index.html" staticPath="/${projectName}/${now?string('yyyyMMddHHmm')}/${packageName}/dao/impl/${tableName}DaoImpl.java"/>
+  <template id="service" type="springboot" name="SERVICE" templatePath="/${template}/springboot/service/index.html" staticPath="/${projectName}/${now?string('yyyyMMddHHmm')}/${packageName}/service/${tableName}Service.java"/>
+  <template id="serviceImpl" type="springboot" name="SERVICE实现" templatePath="/${template}/springboot/service/impl/index.html" staticPath="/${projectName}/${now?string('yyyyMMddHHmm')}/${packageName}/service/impl/${tableName}ServiceImpl.java"/>
+  <template id="controller" type="springboot" name="CONTROLLER" templatePath="/${template}/springboot/controller/index.html" staticPath="/${projectName}/${now?string('yyyyMMddHHmm')}/${packageName}/controller/${tableName}Controller.java"/>
 
+  <template id="front_add" type="ant_ts" name="front_add" templatePath="/${template}/antdpro_ts/add/index.tsx.html" staticPath="/${projectName}/${now?string('yyyyMMddHHmm')}/front/${tableName}/add/index.tsx"/>
+  <template id="front_table_less" type="ant_ts" name="front_table_less" templatePath="/${template}/antdpro_ts/components/StandardTable/index.less.html" staticPath="/${projectName}/${now?string('yyyyMMddHHmm')}/front/${tableName}/components/StandardTable/index.less"/>
+  <template id="front_table_tsx" type="ant_ts" name="front_table_tsx" templatePath="/${template}/antdpro_ts/components/StandardTable/index.tsx.html" staticPath="/${projectName}/${now?string('yyyyMMddHHmm')}/front/${tableName}/components/StandardTable/index.tsx"/>
+  <template id="front_data_d_ts" type="ant_ts" name="front_data_d_ts" templatePath="/${template}/antdpro_ts/data.d.ts.html" staticPath="/${projectName}/${now?string('yyyyMMddHHmm')}/front/${tableName}/data.d.ts"/>
+  <template id="front_index_tsx" type="ant_ts" name="front_index_tsx" templatePath="/${template}/antdpro_ts/index.tsx.html" staticPath="/${projectName}/${now?string('yyyyMMddHHmm')}/front/${tableName}/index.tsx"/>
+  <template id="front_model_ts" type="ant_ts" name="front_model_ts" templatePath="/${template}/antdpro_ts/model.ts.html" staticPath="/${projectName}/${now?string('yyyyMMddHHmm')}/front/${tableName}/model.ts"/>
+  <template id="front_service_ts" type="ant_ts" name="front_service_ts" templatePath="/${template}/antdpro_ts/service.ts.html" staticPath="/${projectName}/${now?string('yyyyMMddHHmm')}/front/${tableName}/service.ts"/>
+  <template id="front_style_less" type="ant_ts" name="front_style_less" templatePath="/${template}/antdpro_ts/style.less.html" staticPath="/${projectName}/${now?string('yyyyMMddHHmm')}/front/${tableName}/style.less"/>
 </setting>

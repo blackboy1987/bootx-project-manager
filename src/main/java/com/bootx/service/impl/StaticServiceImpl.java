@@ -1,8 +1,6 @@
 
 package com.bootx.service.impl;
 
-import com.bootx.common.ProjectTemplate;
-import com.bootx.common.Template;
 import com.bootx.entity.ProjectTable;
 import com.bootx.service.StaticService;
 import com.bootx.service.TemplateService;
@@ -77,17 +75,15 @@ public class StaticServiceImpl implements StaticService, ServletContextAware {
 
 		delete(projectTable);
 		int buildCount = 0;
-    ProjectTemplate projectTemplate = projectTable.getProjectTemplate();
+    Map<String,String> projectTemplates = projectTable.getTemplatePaths();
     Map<String, Object> model = new HashMap<>();
     model.put("project", projectTable.getProjectInfo());
     model.put("projectTable", projectTable);
-    buildCount += build(projectTemplate.getEntityTemplatePath(),projectTemplate.getEntityStaticPath(), model);
-    buildCount += build(projectTemplate.getDaoTemplatePath(), projectTemplate.getDaoStaticPath(), model);
-    buildCount += build(projectTemplate.getDaoImplTemplatePath(), projectTemplate.getDaoImplStaticPath(), model);
-    buildCount += build(projectTemplate.getServiceTemplatePath(), projectTemplate.getServiceStaticPath(), model);
-    buildCount += build(projectTemplate.getServiceImplTemplatePath(), projectTemplate.getServiceImplStaticPath(), model);
-    buildCount += build(projectTemplate.getControllerTemplatePath(), projectTemplate.getControllerStaticPath(), model);
-		return buildCount;
+    for (String key:projectTemplates.keySet()) {
+      buildCount += build(key,projectTemplates.get(key), model);
+
+    }
+   return buildCount;
 	}
 
 
